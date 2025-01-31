@@ -32,7 +32,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle  # Gradle 빌드 실행
-        run: ./gradlew build --no-daemon
+        run: ./gradlew clean build --no-daemon
 
       - name: Run Java Application  # Java 애플리케이션 실행
         run: java -jar build/libs/*.jar

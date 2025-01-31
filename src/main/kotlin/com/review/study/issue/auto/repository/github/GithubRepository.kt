@@ -24,6 +24,8 @@ class GithubRepository(
         labels: Set<String>,
         assignees: Set<String>,
     ) {
+        log.info("github username: $username")
+        log.info("github repository: $repoName")
         val request = IssueCreateRequest(title, body, labels, assignees)
         val response = client.post()
             .uri("/repos/${username}/${repoName}/issues")

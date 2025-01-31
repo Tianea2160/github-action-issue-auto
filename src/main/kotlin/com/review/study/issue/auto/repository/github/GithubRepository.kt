@@ -43,6 +43,8 @@ class GithubRepository(
     }
 
     fun findAllIssueByLabel(label: String): List<IssueInfoResponse> {
+        log.info("github username: $username")
+        log.info("github repository: $repoName")
         val response = client.get()
             .uri("/repos/${username}/${repoName}/issues?labels=${label}")
             .headers {

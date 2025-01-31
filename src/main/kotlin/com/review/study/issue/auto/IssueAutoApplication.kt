@@ -3,11 +3,14 @@ package com.review.study.issue.auto
 import com.review.study.issue.auto.application.TemplateService
 import com.review.study.issue.auto.repository.github.GithubRepository
 import com.review.study.issue.auto.repository.user.UserRepository
-import jakarta.annotation.PostConstruct
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.boot.runApplication
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.context.event.EventListener
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
@@ -17,6 +20,7 @@ class IssueAutoApplication(
     private val githubRepository: GithubRepository,
     private val userRepository: UserRepository,
     private val templateService: TemplateService,
+    private val context: ConfigurableApplicationContext,
 ) {
     private val log: Logger = LoggerFactory.getLogger(IssueAutoApplication::class.java)
     private val WEEKLY_REVIEW_ISSUE_BODY_TEMPLATE: String = ("# 이번주 목표\n"
@@ -30,7 +34,7 @@ class IssueAutoApplication(
             + "# 다음주 목표\n"
             + "1.\n")
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent::class)
     fun init() {
         // 현재 주 label
         val now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
@@ -60,6 +64,7 @@ class IssueAutoApplication(
                 assignees = setOf(it.loginId),
             )
         }
+        SpringApplication.exit(context)
     }
 }
 

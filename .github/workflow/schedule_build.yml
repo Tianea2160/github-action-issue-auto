@@ -1,6 +1,10 @@
 name: Scheduled Build and Run
 
 on:
+  push:
+    branches:
+      - main
+      - test
   schedule:
     - cron: "10 15 * * 1"  # 한국시간(KST) 월요일 00:10 (UTC 15:10)
   workflow_dispatch:  # ✅ 수동 실행 가능하게 추가

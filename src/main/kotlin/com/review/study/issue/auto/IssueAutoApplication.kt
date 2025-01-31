@@ -48,7 +48,7 @@ class IssueAutoApplication(
         log.info(previousWeekLabel)
 
         // 이전 주 라벨로 이슈 조회
-        val issues = githubRepository.findAllIssueByLabel(currentWeekLabel)
+        val issues = githubRepository.findAllIssueByLabel(previousWeekLabel)
         // 이전 주 이슈 close
         issues.forEach { githubRepository.closeIssue(it.number) }
 

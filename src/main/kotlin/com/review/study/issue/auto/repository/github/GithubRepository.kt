@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient
 class GithubRepository(
     @Value("\${github.token}") private val token: String,
     @Value("\${github.username}") private val username: String,
-    @Value("\${github.repository}") private val repoName: String
+    @Value("\${github.repoName}") private val repoName: String
 ) {
     private val client: WebClient = WebClient.create("https://api.github.com")
     private val log: Logger = LoggerFactory.getLogger(GithubRepository::class.java)

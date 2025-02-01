@@ -1,10 +1,6 @@
 name: Scheduled Build and Run
 
 on:
-  push:
-    branches:
-      - main
-      - test
   schedule:
     - cron: "10 15 * * 1"  # 한국시간(KST) 월요일 00:10 (UTC 15:10)
 #    - cron: "*/1 * * * *"  # test를 위해서 1분 마다 실행
